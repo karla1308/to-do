@@ -1,0 +1,22 @@
+<div class="container">
+  <h1 class="my-4"><%= @category.name %></h1>
+  <p><%= @category.description %></p>
+
+  <div class="d-flex gap-2 mb-4">
+    <%= link_to "Edit", edit_category_path(@category), class: "btn btn-secondary" %>
+    <%= button_to "Delete", @category, method: :delete, class: "btn btn-danger" %>
+  </div>
+
+  <h3>Todos in this category:</h3>
+  <% if @todos.any? %>
+    <ul class="list-group">
+      <% @todos.each do |todo| %>
+        <li class="list-group-item">
+          <%= link_to todo.title, todo %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No todos yet.</p>
+  <% end %>
+</div>

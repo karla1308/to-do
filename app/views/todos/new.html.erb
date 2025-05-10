@@ -1,0 +1,23 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2 class="mb-4">New To-Do Item</h2>
+      
+      <%= render 'form', todo: @todo %>
+      
+      <%= link_to 'Back', todos_path, class: "btn btn-secondary mt-3" %>
+
+      <% if @todo.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= pluralize(@todo.errors.count, "error") %> prevented saving:</h4>
+          <ul>
+            <% @todo.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

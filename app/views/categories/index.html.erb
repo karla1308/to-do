@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 class="my-4">Your Categories</h1>
+  <%= link_to "New Category", new_category_path, class: "btn btn-primary mb-4" %>
+
+  <div class="list-group">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, category, class: "list-group-item list-group-item-action" %>
+    <% end %>
+  </div>
+</div>

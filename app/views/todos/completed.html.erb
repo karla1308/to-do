@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="my-4">Completed Todos</h1>
+  
+  <% if @todos.any? %>
+    <div class="list-group">
+      <% @todos.each do |todo| %>
+        <%= render todo %>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="alert alert-info">No completed todos yet.</div>
+  <% end %>
+  
+  <%= link_to 'Back to All Todos', todos_path, class: "btn btn-secondary mt-3" %>
+</div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <h1 class="my-4"><%= @todo.title %></h1>
+  <p>
+    <strong>Category:</strong> <%= @todo.category&.name || "Uncategorized" %>
+  </p>
+  <p>
+    <strong>Priority:</strong> <%= @todo.priority ? "Yes" : "No" %>
+  </p>
+  <p>
+    <strong>Status:</strong> <%= @todo.completed ? "Completed" : "Pending" %>
+  </p>
+
+  <div class="d-flex gap-2 mb-4">
+    <%= link_to "Edit", edit_todo_path(@todo), class: "btn btn-secondary" %>
+    <%= button_to "Delete", @todo, method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>

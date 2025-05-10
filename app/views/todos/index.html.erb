@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 class="my-4">Your Todos</h1>
+  <%= link_to "New Todo", new_todo_path, class: "btn btn-primary mb-4" %>
+
+  <div class="list-group">
+    <% @todos.each do |todo| %>
+      <div class="list-group-item <%= 'list-group-item-success' if todo.completed %>">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="flex-grow-1 me-3">
+            <h5 class="mb-1"><%= todo.title %></h5>
+            <small class="text-muted">
+              Category: <%= todo.category.name if todo.category %>
+              <% if todo.priority %>
+                <span class="badge bg-warning ms-2">Priority</span>
+              <% end %>
+            </small>
+          </div>
+          
+          <div class="d-flex align-items-center">
+            <%= form_with model: todo, url: complete_todo_path(todo), method: :patch, local: true do |f| %>
+              <div class="form-check form-switch">
+                <%= f.check_box :completed, 
+                class: "form-check-input", 
+                onchange: "this.form.submit()",
+                id: "todo_complete_#{todo.id}" %>
+                <%= f.label :completed, class: "form-check-label", for: "todo_complete_#{todo.id}" do %>
+                <%= todo.completed ? "Completed" : "Mark Complete" %>
+                <% end %>
+              </div>
+            <% end %>
+            
+            <div class="btn-group ms-3">
+              <%= link_to 'Edit', edit_todo_path(todo), class: "btn btn-sm btn-outline-secondary" %>
+              <%= link_to 'Delete', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-outline-danger" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
