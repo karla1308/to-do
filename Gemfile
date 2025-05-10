@@ -36,12 +36,12 @@ gem "bootsnap", require: false
 
 gem "bootstrap", "~> 5.3.3"
 gem "font-awesome-sass", "~> 6.4"
-gem 'sassc-rails'
-gem 'jquery-rails'
-gem 'popper_js', '~> 2.11.8'
+gem "sassc-rails"
+gem "jquery-rails"
+gem "popper_js", "~> 2.11.8"
 
-gem 'execjs'
-gem 'mini_racer'
+gem "execjs"
+gem "mini_racer"
 
 
 group :development, :test do
