@@ -1,0 +1,25 @@
+<!-- 
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+Landing page - The first page users see once they have logged in.
+-->
+
+<div class="card card-body">
+  <div class="text-center py-5">
+    <h1 class="display-4 mb-4">Let's Get Started!</h1>
+    <p class="lead mb-5">
+      Where would you want to start?
+    </p>
+    
+    <div class="d-flex justify-content-center gap-4 mb-4">
+      <%= link_to "Categories", categories_path, class: "btn btn-outline-grclr btn-lg px-4" %>
+      <%= link_to "To-dos", todos_path, class: "btn btn-outline-blclr btn-lg px-4" %>
+      <%= link_to "Completed", completed_todos_path, class: "btn btn-outline-grclr btn-lg px-4" %>
+    </div>
+
+	<p class=" mb-5">
+      Not sure where to start? Start by making a Category. <br> From there you could make more or start making To-dos to place in a category. <br> Always keep track of the status of your To-dos!
+    </p>
+    
+
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<!-- 
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+Main layout - Includes the general structure for all pages, such as header, footer, and navigation bar. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>To-Do App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag :main %>
+  </head>
+
+  <body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+      <div class="container">
+        <% if !logged_in? %>
+          <%= link_to "To-Do App", root_path, class: "navbar-brand" %>
+        <% else %>
+          <%= link_to "To-Do App", getstarted_landing_path, class: "navbar-brand" %>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <% if logged_in? %>
+              <li class="nav-item">
+                <%= link_to "Categories", categories_path, class: "nav-link #{'active' if current_page?(categories_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "To-dos", todos_path, class: "nav-link #{'active' if current_page?(todos_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Completed", completed_todos_path, class: "nav-link #{'active' if current_page?(completed_todos_path)}" %>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="navbar-nav">
+            <% if logged_in? %>
+              <li class="nav-item d-flex align-items-center">
+                  <%= link_to profile_users_path, class: "nav-link d-flex align-items-center" do %>
+                    <i class="fas fa-user me-2"></i>
+                    <span><%= current_user.first_name %></span>
+                  <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Login", login_path, class: "nav-link #{'active' if current_page?(login_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign Up", new_user_path, class: "nav-link #{'active' if current_page?(new_user_path)}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Alert Messages -->
+    <div class="container">
+      <% flash.each do |type, msg| %>
+        <div class="alert alert-<%= type == 'notice' ? 'success' : 'danger' %> alert-dismissible fade show mt-3">
+          <%= msg %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="container mt-4 mb-5">
+      <%= yield %>
+    </div>
+
+  
+  </body>
+</html>

@@ -1,0 +1,22 @@
+<!--
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+Bootstrap container to center and pad content -->
+<div class="container">
+  <h1 class="my-4" style="text-decoration: underline;">Completed To-dos</h1>
+
+  <!-- Check if there are any completed to-dos to display -->
+  <% if @todos.any? %>
+    <div class="list-group">
+      <% @todos.each do |todo| %>
+        <%= render todo %>
+      <% end %>
+    </div>
+
+  <!-- Message shown when no completed to-dos exist -->
+  <% else %>
+    <div class="alert alert-info">No completed to-dos yet.</div>
+  <% end %>
+
+  <!-- Link to navigate back to the main list of all to-dos -->
+  <%= link_to 'Back to All To-dos', todos_path, class: "btn btn-outline-blclr mt-3" %>
+</div>

@@ -1,0 +1,56 @@
+<!--
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+  This page displays all of the current users to-dos with options to:
+  - View each to-dos title, category, and priority
+  - Mark to-dos as completed using a toggle switch
+  - Edit or delete individual to-dos
+  - Navigate to the form to create a new to-do
+  Completed to-dos are visually highlighted for better distinction.
+--> 
+
+<div class="container">
+  <h1 class="my-4" style="text-decoration: underline;">Your To-dos</h1>
+
+  <% if !@todos.any? %>
+    <div class="alert alert-info">No to-dos yet. Create one!</div>
+  <% end %>
+
+  <%= link_to "New To-do", new_todo_path, class: "btn btn-outline-grclr mb-4" %>
+
+  <div class="list-group">
+    <% @todos.each do |todo| %>
+      <div class="list-group-item <%= 'list-group-item-success' if todo.completed %>">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="flex-grow-1 me-3">
+            <h5 class="mb-1"><%= todo.title %></h5>
+            <small class="text-muted">
+              Category: <%= todo.category.name if todo.category %>
+              <% if todo.priority %>
+                <span class="badge bg-yeclr ms-2">Priority</span>
+              <% end %>
+            </small>
+          </div>
+          
+          <div class="d-flex align-items-center">
+            <%= form_with model: todo, url: complete_todo_path(todo), method: :patch, local: true do |f| %>
+              <div class="form-check form-switch">
+                <%= f.check_box :completed, 
+                class: "form-check-input", 
+                onchange: "this.form.submit()",
+                id: "todo_complete_#{todo.id}" %>
+                <%= f.label :completed, class: "form-check-label ms-2", for: "todo_complete_#{todo.id}" do %>
+                <%= todo.completed ? "Completed" : " Mark Complete" %>
+                <% end %>
+              </div>
+            <% end %>
+            
+            <div class="gap-2 ms-3">
+              <%= link_to 'Edit', edit_todo_path(todo), class: "btn btn-sm btn-blclr" %>
+              <%= link_to 'Delete', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-redclr" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

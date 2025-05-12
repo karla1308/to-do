@@ -1,0 +1,34 @@
+<!-- 
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+Form for creating or updating a ToDo item using Rails form_with helper -->
+<%= form_with(model: todo) do |form| %>
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control", required: true %>
+  </div>
+
+  <!-- Category dropdown selection -->
+  <div class="mb-3">
+    <%= form.label :category_id, "Category", class: "form-label" %>
+    <%= form.collection_select :category_id, 
+          current_user.categories, :id, :name,
+          { prompt: "Select Category" },
+          class: "form-select", required: true %>
+  </div>
+
+
+  <!-- Checkbox for setting high priority -->
+  <div class="mb-3 form-check">
+    <%= form.check_box :priority, { class: "form-check-input" }, "true", "false" %>
+    <%= form.label :priority, "High Priority", class: "form-check-label" %>
+  </div>
+
+  <!-- Checkbox to mark the task as completed -->
+  <div class="mb-3 form-check">
+    <%= form.check_box :completed, class: "form-check-input" %>
+    <%= form.label :completed, class: "form-check-label" %>
+  </div>
+
+<!-- Submit button for the form -->
+  <%= form.submit "Create To-do", class: "btn btn-outline-grclr" %>
+<% end %>

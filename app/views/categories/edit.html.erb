@@ -1,0 +1,19 @@
+<h1>Edit Category</h1>
+
+<%= form_with model: @category, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :description %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Save Changes", class: "btn btn-grclr" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', categories_path, class: 'btn btn-outline-blclr' %>

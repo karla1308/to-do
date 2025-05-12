@@ -1,0 +1,15 @@
+<div class="container">
+  <h1 class="my-4" style="text-decoration: underline;">Your Categories</h1>
+
+  <% if !@categories.any? %>
+    <div class="alert alert-info">No Categories yet. Create one!</div>
+  <% end %>
+
+  <%= link_to "New Category", new_category_path, class: "btn btn-outline-grclr mb-4" %>
+
+  <div class="list-group">
+    <% @categories.each do |category| %>
+      <%= link_to category.name, category, class: "list-group-item list-group-item-action" %>
+    <% end %>
+  </div>
+</div>

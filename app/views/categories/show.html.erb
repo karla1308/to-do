@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="my-4" style="text-decoration: underline;"><%= @category.name %></h1>
+    
+  <div class="card-body card mb-4">
+    <p><%= @category.description %></p>
+  </div>
+
+  <div class="d-flex gap-2 mb-4">
+    <%= link_to "Edit", edit_category_path(@category), class: "btn btn-blclr" %>
+    <%= button_to "Delete", @category, method: :delete, class: "btn btn-redclr" %>
+  </div>
+
+  <h3>To-dos in this category:</h3>
+  <% if @todos.any? %>
+    <ul class="list-group">
+      <% @todos.each do |todo| %>
+        <li class="list-group-item">
+          <%= link_to todo.title, todo %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No to-dos yet.</p>
+  <% end %>
+
+  <div class="d-flex gap-2 mb-4">
+    <%= link_to 'Back', categories_path, class: "btn btn-blclr mt-3" %>
+    <%= link_to 'Add New To-do', todos_path, class: "btn btn-blclr mt-3" %>
+  </div>
+
+</div>

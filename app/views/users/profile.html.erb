@@ -1,0 +1,28 @@
+<!--
+Coco Carragher, Gi Cort Grasso, Karla Ganon
+  This page displays the currently logged-in users profile information, including
+  First Name, Last Name, Username, and Email, inside a styled Bootstrap card.
+  It also provides a button to delete the users account, with a confirmation prompt.
+--> 
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Your Profile</h2>
+
+      <div class="card mt-4">
+        <div class="card-body">
+          <p><strong>First Name:</strong> <%= @user.first_name %></p>
+          <p><strong>Last Name:</strong> <%= @user.last_name %></p>
+          <p><strong>Username:</strong> <%= @user.username %></p> 
+          <p><strong>Email:</strong> <%= @user.email %></p>
+
+          <%= button_to "Delete Account",
+                destroy_account_users_path,
+                method: :delete,
+                data: { confirm: "Are you sure?" },
+                class: "btn btn-outline-redclr mt-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
